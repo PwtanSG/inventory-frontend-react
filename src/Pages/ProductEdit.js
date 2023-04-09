@@ -71,7 +71,7 @@ const ProductEdit = () => {
                     method: 'get',
                     url: get_api_url,
                 })
-                console.log(response.data)
+                // console.log(response.data)
                 setFormData(response.data)
                 setImage(response.data.productImage)
                 setImage(response.data.productImage ? `${API_URL_ASSETS}${response.data.productImage}` : placeholderImg)
