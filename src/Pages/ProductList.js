@@ -3,10 +3,10 @@ import axios from 'axios'
 import DataTable from 'react-data-table-component'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-import { FaSpinner, FaList, FaBuromobelexperte } from 'react-icons/fa'
+import { FaSpinner, FaList, FaBuromobelexperte, FaFileCsv } from 'react-icons/fa'
 import SearchBar from '../Components/Searchbar'
 import ProductCard from '../Components/ProductCard'
-
+import exportFromJSON from 'export-from-json'
 
 const ProductList = () => {
     let mount = useRef(true)
@@ -125,11 +125,31 @@ const ProductList = () => {
         );
     }, [keyword, resetPaginationToggle]);
 
+    const onExportCsv = () => {
+        const dataTmp = [...productList]
+        const data = dataTmp.map((item) => {
+            return (
+                {
+                    productId: item.productId,
+                    productName: item.productName,
+                    description: item.description,
+                    productImage: item.productImage,
+                    qty: item.qty
+                }
+            )
+        })
+        const fileName = 'download_inventory_list'
+        const exportType = exportFromJSON.types.csv
+
+        exportFromJSON({ data, fileName, exportType })
+    }
+
     return (
         <>
             <div className='left' style={{ "marginTop": "8px" }}>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={() => { setViewType('List View') }}><FaList /></button>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={() => { setViewType('Card View') }}><FaBuromobelexperte style={{ "marginLeft": "5px" }} /></button>
+                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={onExportCsv}><FaFileCsv size={20} className='mx-1' /></button>
+                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={() => { setViewType('List View') }}><FaList size={20} className='mx-1' /></button>
+                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={() => { setViewType('Card View') }}><FaBuromobelexperte size={20} className='mx-1' /></button>
                 <span> {viewType} </span>
             </div>
             <br></br>
