@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom'
 const ProductCard = (props) => {
 
     const item = props.item
-    const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
+    // const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
+    const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS_1
     const navigate = useNavigate();
     return (
         <>
