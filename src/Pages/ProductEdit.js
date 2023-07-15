@@ -5,20 +5,21 @@ import { FaSpinner, FaEdit } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import ToastComponent from '../Components/ToastComponent'
 import placeholderImg from '../assets/img-product-placeholder.png'
-import { uploadFile } from 'react-s3';
+import { uploadFile } from 'react-s3'; //client upload
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
-const S3_BUCKET = 'assetsawss3';
-const REGION = 'us-east-1';
-const ACCESS_KEY = '';
-const SECRET_ACCESS_KEY = '';
+// using aws client upload 
+// const S3_BUCKET = 'assetsawss3';
+// const REGION = 'us-east-1';
+// const ACCESS_KEY = '';
+// const SECRET_ACCESS_KEY = '';
 
-const config = {
-    bucketName: 'assetsawss3',
-    region: 'us-east-1',
-    accessKeyId: '',
-    secretAccessKey: '',
-}
+// const config = {
+//     bucketName: 'assetsawss3',
+//     region: 'us-east-1',
+//     accessKeyId: '',
+//     secretAccessKey: '',
+// }
 
 
 const ProductEdit = () => {
@@ -47,13 +48,16 @@ const ProductEdit = () => {
     const navigate = useNavigate()
     const API_URL = process.env.REACT_APP_BACKEND_DOMAIN1
     const API_URL_GET = process.env.REACT_APP_BACKEND_DOMAIN2
-    const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
+    // const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
+    const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS_1
+    const API_URL_ENDPOINT_S3 = process.env.REACT_APP_BACKEND_ENDPOINT_S3
 
     // const validatePidDigit5 = new RegExp('[0-9]{5}');
 
     const { id } = useParams()
 
     const handleFileInput = (e) => {
+        console.log(e.target.files[0].name)
         setSelectedFile(e.target.files[0]);
         setImage(URL.createObjectURL(e.target.files[0]));
         setFormData({
@@ -89,7 +93,7 @@ const ProductEdit = () => {
         if (mount.current) {
             getData()
         }
-        return ()=>{
+        return () => {
             mount.current = false
         }
     }, [API_URL_GET, API_URL_ASSETS, id])
@@ -125,14 +129,37 @@ const ProductEdit = () => {
                 })
             }
 
-            const handleUpload = async (file) => {
-                uploadFile(file, config)
-                    .then(data => console.log(data))
-                    .catch(err => console.error(err))
-            }
+            //using client upload
+            // const handleUpload = async (file) => {
+            //     uploadFile(file, config)
+            //         .then(data => console.log(data))
+            //         .catch(err => console.error(err))
+            // }
 
             if (selectedFile) {
-                handleUpload(selectedFile)
+                //handleUpload(selectedFile)
+                console.log('selected file:', selectedFile)
+                console.log('selected filename:', selectedFile.name)
+
+                //using api-gateway S3 upload
+                var config = {
+                    method: 'put',
+                    // url: 'https://tru0g8ptbg.execute-api.us-east-1.amazonaws.com/prod/pwt-bucket-s3/' + selectedFile.name,
+                    url: `${API_URL_ENDPOINT_S3} ${selectedFile.name}`,
+                    headers: {
+                        //   'Content-Type': 'image/png'
+                        'Content-Type': selectedFile.type
+                    },
+                    data: selectedFile
+                };
+
+                axios(config)
+                    .then(function (response) {
+                        console.log(JSON.stringify(response.data));
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
 
             setProcessing(false)

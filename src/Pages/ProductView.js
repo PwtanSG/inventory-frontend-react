@@ -36,7 +36,9 @@ const ProductView = () => {
     const [status, setStatus] = useState(initStatus)
     const API_URL = process.env.REACT_APP_BACKEND_DOMAIN2
     const API_URL_PRODUCT = process.env.REACT_APP_BACKEND_DOMAIN1
-    const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
+    // const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
+    const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS_1
+
     const { id } = useParams()
 
     const onDeleteHandler = async (pid) => {
@@ -96,7 +98,7 @@ const ProductView = () => {
         if (mount.current) {
             getData()
         }
-        return ()=>{
+        return () => {
             mount.current = false
         }
     }, [API_URL, id])
