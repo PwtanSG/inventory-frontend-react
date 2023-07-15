@@ -137,15 +137,16 @@ const ProductEdit = () => {
             // }
 
             if (selectedFile) {
+                // console.log('selected file:', selectedFile)
+                // console.log('selected filename:', selectedFile.name)
+                //using client upload
                 //handleUpload(selectedFile)
-                console.log('selected file:', selectedFile)
-                console.log('selected filename:', selectedFile.name)
 
                 //using api-gateway S3 upload
                 var config = {
                     method: 'put',
                     // url: 'https://tru0g8ptbg.execute-api.us-east-1.amazonaws.com/prod/pwt-bucket-s3/' + selectedFile.name,
-                    url: `${API_URL_ENDPOINT_S3} ${selectedFile.name}`,
+                    url: `${API_URL_ENDPOINT_S3}${selectedFile.name}`,
                     headers: {
                         //   'Content-Type': 'image/png'
                         'Content-Type': selectedFile.type
