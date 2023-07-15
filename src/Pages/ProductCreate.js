@@ -5,12 +5,14 @@ import { FaSpinner } from 'react-icons/fa'
 import { BsFillFileEarmarkPlusFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import ToastComponent from '../Components/ToastComponent'
+import placeholderImg from '../assets/img-product-placeholder.png'
 
 const ProductCreate = () => {
     const initFormData = {
         productId: '',
         productName: '',
         description: '',
+        productImage: '',
         qty: 0,
     }
     const [formData, setFormData] = useState(initFormData)
@@ -25,10 +27,23 @@ const ProductCreate = () => {
     const [isProcessing, setProcessing] = useState(false)
     const [toastSuccess, setToastSuccess] = useState(false)
     const [toastError, setToastError] = useState(false)
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [image, setImage] = useState(null)
     const navigate = useNavigate()
     const API_URL = process.env.REACT_APP_BACKEND_DOMAIN1
+    const API_URL_UPLOAD_S3 = process.env.REACT_APP_BACKEND_ENDPOINT_S3
 
     const validatePidDigit5 = new RegExp('[0-9]{5}');
+
+    const handleFileInput = (e) => {
+        // console.log(e.target.files[0].name)
+        setSelectedFile(e.target.files[0]);
+        setImage(URL.createObjectURL(e.target.files[0]));
+        setFormData({
+            ...formData,
+            productImage: e.target.files[0].name
+        })
+    }
 
     const onChangeHandler = (e) => {
         setFormData((prevData) => ({
@@ -51,7 +66,7 @@ const ProductCreate = () => {
             validationErrMsg += 'Product name must be at least 3 char.'
             validationErr = true
         }
-        if (formData.qty.length === 0 ){
+        if (formData.qty.length === 0) {
             validationErrMsg += 'Product Qty is required'
             validationErr = true
         } else if (isNaN(formData.qty)) {
@@ -69,6 +84,28 @@ const ProductCreate = () => {
                 // console.log(API_URL)
                 setProcessing(true)
                 // setLoading(true)
+
+                if (selectedFile) {
+                    //using api-gateway S3 upload
+                    var config = {
+                        method: 'put',
+                        url: `${API_URL_UPLOAD_S3}${selectedFile.name}`,
+                        headers: {
+                            //   'Content-Type': 'image/png'
+                            'Content-Type': selectedFile.type
+                        },
+                        data: selectedFile
+                    };
+
+                    axios(config)
+                        .then(function (response) {
+                            console.log(JSON.stringify(response.data));
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+
                 const response = await axios.post(`${API_URL}`, formData)
                 if (response.status === 200) {
                     setToastSuccess(true)
@@ -117,17 +154,23 @@ const ProductCreate = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: '100vh',
+                    // height: '100vh',
                 }}
             >
                 <div className='container'>
-
+                    <br></br>
                     <section className='heading'>
                         <h1><BsFillFileEarmarkPlusFill /> Add New Product</h1>
                     </section>
                     <section className='form'>
                         {status.error && <div className='' style={{ color: 'red' }}>{status.errorMessage}</div>}
                         <form onSubmit={onSubmitHandler}>
+                            <div className='form-group m-2'>
+                                <div>
+                                    <img alt="preview" src={image || placeholderImg} width={250} className='m-3' />
+                                    <input type="file" accept="image/png, image/jpeg" onChange={handleFileInput} />
+                                </div>
+                            </div>
                             <div className='form-group m-2'>
                                 <input
                                     type='text'
@@ -181,6 +224,7 @@ const ProductCreate = () => {
                     </section>
                 </div>
             </div>
+            <br></br>
         </>
     )
 }
