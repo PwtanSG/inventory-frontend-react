@@ -8,6 +8,8 @@ import SearchBar from '../Components/Searchbar'
 import ProductCard from '../Components/ProductCard'
 import exportFromJSON from 'export-from-json'
 
+axios.defaults.headers.common['x-api-key'] = process.env.REACT_APP_BACKEND_API_KEY;
+
 const ProductList = () => {
     let mount = useRef(true)
     const initViewType = 'Card View'
@@ -34,7 +36,7 @@ const ProductList = () => {
                 setProductList(response.data.products)
                 setLoading(false)
             } catch (err) {
-                // console.log('err', err)
+                console.log('err', err)
                 setStatus({
                     ...status,
                     error: true,

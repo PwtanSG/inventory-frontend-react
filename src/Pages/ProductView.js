@@ -82,6 +82,7 @@ const ProductView = () => {
                 const response = await axios({
                     method: 'get',
                     url: API_URL + id,
+                    //headers: {'x-api-key': 'your api key'}      
                 })
                 setProduct(response.data)
                 setLoading(false)
