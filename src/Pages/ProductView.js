@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router'
 import { Button, Card, Modal } from 'react-bootstrap';
 import { FaRegEdit, FaRegTrashAlt, FaSpinner, FaTrashAlt } from 'react-icons/fa'
 import ToastComponent from '../Components/ToastComponent'
+import ToastTopComponent from '../Components/ToastTopComponent';
 import placeholderImg from '../assets/img-product-placeholder.png'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -106,8 +107,8 @@ const ProductView = () => {
 
     return (
         <>
-            {toastSuccess && <ToastComponent text={'Delete Successfully'} type={'success'} />}
-            {toastError && <ToastComponent text={'Delete Error'} type={'error'} />}
+            {toastSuccess && <ToastTopComponent text={'Delete Successfully'} type={'success'} />}
+            {toastError && <ToastTopComponent text={'Delete Error'} type={'error'} />}
             <div
                 style={{
                     display: 'flex',
