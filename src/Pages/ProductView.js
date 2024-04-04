@@ -116,30 +116,34 @@ const ProductView = () => {
                     height: '100vh',
                 }}
             >
-                <Col xs lg="5">
-                    {isLoading ?
-                        <div><FaSpinner /></div>
-                        : <div>
-                            <img className="" src={product?.productImage ? `${API_URL_ASSETS}${product.productImage}` : placeholderImg} alt={product.productName} />
-                        </div>
-                    }
-
-                </Col>
-                <Col xs lg="5">
-                    <div>
-                        <h4 className="card-title">{!isLoading ? product.productName : <FaSpinner className="icon_pulse" />}</h4>
-                        <p className="card-text">Product Id : {!isLoading ? product.productId : "" }</p>
-                        <p className="card-text">Qty : {!isLoading ? product.qty : "" }</p>
-                        <p className="card-text">Description : {!isLoading ? product?.description : "" }</p>
-                        <span className='icon'><FaRegEdit onClick={() => navigate('/product/edit/' + product.productId)} /></span>
-                        <span className='danger' style={{ "marginLeft": "8px" }}><FaRegTrashAlt onClick={handleShow} /></span>
-                    </div>
+                <Container>
                     <Row>
-                        <Button variant="primary" className='m-2' onClick={() => navigate('/')} disabled={isLoading}>Back</Button>
-                        {/* <Button variant="primary" className='m-2' onClick={() => navigate('/product/edit/' + product.productId)}>EDIT</Button>
+                        <Col xs>
+                            {isLoading ?
+                                <div><FaSpinner /></div>
+                                : <div>
+                                    <img className="" src={product?.productImage ? `${API_URL_ASSETS}${product.productImage}` : placeholderImg} alt={product.productName} />
+                                </div>
+                            }
+
+                        </Col>
+                        <Col xs>
+                            <div>
+                                <h4 className="card-title">{!isLoading ? product.productName : <FaSpinner className="icon_pulse" />}</h4>
+                                <p className="card-text">Product Id : {!isLoading ? product.productId : ""}</p>
+                                <p className="card-text">Qty : {!isLoading ? product.qty : ""}</p>
+                                <p className="card-text">Description : {!isLoading ? product?.description : ""}</p>
+                                <span className='icon'><FaRegEdit onClick={() => navigate('/product/edit/' + product.productId)} /></span>
+                                <span className='danger' style={{ "marginLeft": "8px" }}><FaRegTrashAlt onClick={handleShow} /></span>
+                            </div>
+                            <Row>
+                                <Button variant="primary" className='m-2' onClick={() => navigate('/')} disabled={isLoading}>Back</Button>
+                                {/* <Button variant="primary" className='m-2' onClick={() => navigate('/product/edit/' + product.productId)}>EDIT</Button>
                                 <Button variant="danger" className='m-2' onClick={() => onDeleteHandler(product.productId)}>Delete</Button> */}
+                            </Row>
+                        </Col>
                     </Row>
-                </Col>
+                </Container>
             </div>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
