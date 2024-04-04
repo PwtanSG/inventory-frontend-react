@@ -106,7 +106,7 @@ const ProductView = () => {
 
     return (
         <>
-            {toastSuccess && <ToastComponent text={'Delete Successfully'} type={'success'} position={'top-end'}/>}
+            {toastSuccess && <ToastComponent text={'Delete Successfully'} type={'success'} position={'top-end'} />}
             {toastError && <ToastComponent text={'Delete Error'} type={'error'} position={'top-end'} />}
             <div
                 style={{
@@ -116,34 +116,30 @@ const ProductView = () => {
                     height: '100vh',
                 }}
             >
-                <Container>
-                    <Row className="justify-content-md-center align-item-center">
-                        <Col xs lg="3">
-                            {isLoading ?
-                                <div><FaSpinner /></div>
-                                : <div>
-                                    <img className="" src={product?.productImage ? `${API_URL_ASSETS}${product.productImage}` : placeholderImg} alt={product.productName} />
-                                </div>
-                            }
+                <Col xs lg="5">
+                    {isLoading ?
+                        <div><FaSpinner /></div>
+                        : <div>
+                            <img className="" src={product?.productImage ? `${API_URL_ASSETS}${product.productImage}` : placeholderImg} alt={product.productName} />
+                        </div>
+                    }
 
-                        </Col>
-                        <Col xs lg="3">
-                            <div>
-                                <h4 className="card-title">{!isLoading ? product.productName : <FaSpinner className="icon_pulse" />}</h4>
-                                <p className="card-text">Product Id : {!isLoading ? product.productId : <FaSpinner className="icon_pulse" />}</p>
-                                <p className="card-text">Qty : {!isLoading ? product.qty : <FaSpinner className="icon_pulse" />}</p>
-                                <p className="card-text">Description : {!isLoading ? product?.description : <FaSpinner className="icon_pulse" />}</p>
-                                <span className='icon'><FaRegEdit onClick={() => navigate('/product/edit/' + product.productId)} /></span>
-                                <span className='danger' style={{ "marginLeft": "8px" }}><FaRegTrashAlt onClick={handleShow} /></span>
-                            </div>
-                            <Row>
-                                <Button variant="primary" className='m-2' onClick={() => navigate('/')} disabled={isLoading}>Back</Button>
-                                {/* <Button variant="primary" className='m-2' onClick={() => navigate('/product/edit/' + product.productId)}>EDIT</Button>
+                </Col>
+                <Col xs lg="5">
+                    <div>
+                        <h4 className="card-title">{!isLoading ? product.productName : <FaSpinner className="icon_pulse" />}</h4>
+                        <p className="card-text">Product Id : {!isLoading ? product.productId : "" }</p>
+                        <p className="card-text">Qty : {!isLoading ? product.qty : "" }</p>
+                        <p className="card-text">Description : {!isLoading ? product?.description : "" }</p>
+                        <span className='icon'><FaRegEdit onClick={() => navigate('/product/edit/' + product.productId)} /></span>
+                        <span className='danger' style={{ "marginLeft": "8px" }}><FaRegTrashAlt onClick={handleShow} /></span>
+                    </div>
+                    <Row>
+                        <Button variant="primary" className='m-2' onClick={() => navigate('/')} disabled={isLoading}>Back</Button>
+                        {/* <Button variant="primary" className='m-2' onClick={() => navigate('/product/edit/' + product.productId)}>EDIT</Button>
                                 <Button variant="danger" className='m-2' onClick={() => onDeleteHandler(product.productId)}>Delete</Button> */}
-                            </Row>
-                        </Col>
                     </Row>
-                </Container>
+                </Col>
             </div>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
