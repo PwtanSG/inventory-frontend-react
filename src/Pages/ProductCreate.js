@@ -5,7 +5,6 @@ import { FaSpinner } from 'react-icons/fa'
 import { BsFillFileEarmarkPlusFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import ToastComponent from '../Components/ToastComponent'
-import ToastTopComponent from '../Components/ToastTopComponent'
 import placeholderImg from '../assets/img-product-placeholder.png'
 
 const ProductCreate = () => {
@@ -148,8 +147,8 @@ const ProductCreate = () => {
 
     return (
         <>
-            {toastSuccess && <ToastTopComponent text={'Added Successfully'} type={'success'} />}
-            {toastError && <ToastTopComponent text={'Create : Error'} type={'error'} />}
+            {toastSuccess && <ToastComponent text={'Added Successfully'} type={'success'} position={'top-end'} />}
+            {toastError && <ToastComponent text={'Create : Error'} type={'error'} position={'top-end'} />}
             <div
                 style={{
                     display: 'flex',

@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap'
 import { FaSpinner, FaEdit } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import ToastComponent from '../Components/ToastComponent'
-import ToastTopComponent from '../Components/ToastTopComponent'
 import placeholderImg from '../assets/img-product-placeholder.png'
 import { uploadFile } from 'react-s3'; //client upload
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -183,8 +182,8 @@ const ProductEdit = () => {
 
     return (
         <>
-            {toastSuccess && <ToastTopComponent text={'Update Successfully'} type={'success'} />}
-            {toastError && <ToastTopComponent text={'Update Error'} type={'error'} />}
+            {toastSuccess && <ToastComponent text={'Update Successfully'} type={'success'} position={'top-end'} />}
+            {toastError && <ToastComponent text={'Update Error'} type={'error'} position={'top-end'} />}
             <div
                 style={{
                     display: 'flex',
