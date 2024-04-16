@@ -154,13 +154,22 @@ const ProductEdit = () => {
                     data: selectedFile
                 };
 
-                axios(config)
-                    .then(function (response) {
-                        console.log(JSON.stringify(response.data));
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                // axios(config)
+                //     .then(function (response) {
+                //         console.log(JSON.stringify(response.data));
+                //     })
+                //     .catch(function (error) {
+                //         console.log(error);
+                //     });
+
+                try {
+                    const res = await axios(config)
+                    if (res.status === 200) {
+                        console.log('Update image success')
+                    }
+                } catch (err) {
+                    console.log('image upload error', err)
+                }
             }
 
             setProcessing(false)
