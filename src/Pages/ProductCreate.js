@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import { FaSpinner } from 'react-icons/fa'
@@ -22,7 +22,6 @@ const ProductCreate = () => {
         errorMessage: ''
     }
     const [status, setStatus] = useState(initStatus)
-
     const [isLoading, setLoading] = useState(false)
     const [isProcessing, setProcessing] = useState(false)
     const [toastSuccess, setToastSuccess] = useState(false)
@@ -97,13 +96,22 @@ const ProductCreate = () => {
                         data: selectedFile
                     };
 
-                    axios(config)
-                        .then(function (response) {
-                            console.log(JSON.stringify(response.data));
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+                    // axios(config)
+                    //     .then(function (response) {
+                    //         console.log(JSON.stringify(response.data));
+                    //     })
+                    //     .catch(function (error) {
+                    //         console.log(error);
+                    //     });
+
+                    try {
+                        const res = await axios(config)
+                        if (res.status === 200) {
+                            console.log('Update image success')
+                        }
+                    } catch (err) {
+                        console.log('image upload error', err)
+                    }
                 }
 
                 const response = await axios.post(`${API_URL}`, formData)
