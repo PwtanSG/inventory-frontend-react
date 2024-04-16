@@ -57,7 +57,7 @@ const ProductEdit = () => {
     const { id } = useParams()
 
     const handleFileInput = (e) => {
-        console.log(e.target.files[0].name)
+        // console.log(e.target.files[0].name)
         setSelectedFile(e.target.files[0]);
         setImage(URL.createObjectURL(e.target.files[0]));
         setFormData({
@@ -209,7 +209,8 @@ const ProductEdit = () => {
                         <form onSubmit={onSubmitHandler}>
                             <div className='form-group m-2'>
                                 <div>
-                                    <img alt="preview" src={image || placeholderImg} width={250} className='m-3' />
+                                    {!isLoading && <img alt="preview" src={image || placeholderImg} width={250} className='m-3' />}
+                                    {isLoading && <h1><FaSpinner className='icon_pulse' /></h1>}
                                     <input type="file" accept="image/png, image/jpeg" onChange={handleFileInput} />
                                 </div>
                                 <label htmlFor="productId">Product Id:</label>
