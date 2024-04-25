@@ -97,6 +97,13 @@ h3 {
   color: #F0F0F0;
 }
 
+.full-page-ctn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .header ul {
   display: flex;
   align-items: center;
