@@ -7,6 +7,7 @@ import { FaSpinner, FaList, FaBuromobelexperte, FaFileCsv } from 'react-icons/fa
 import SearchBar from '../Components/Searchbar'
 import ProductCard from '../Components/ProductCard'
 import exportFromJSON from 'export-from-json'
+import { getSessionToken } from '../Services/userSession'
 
 axios.defaults.headers.common['x-api-key'] = process.env.REACT_APP_BACKEND_API_KEY;
 
@@ -22,8 +23,10 @@ const ProductList = () => {
     }
     const [status, setStatus] = useState(initStatus)
     const API_URL = process.env.REACT_APP_BACKEND_DOMAIN
-    const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
+    // const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
     const navigate = useNavigate();
+    const token = getSessionToken();
+    axios.defaults.headers['Authorization'] = token;
 
     useEffect(() => {
         const getData = async () => {
