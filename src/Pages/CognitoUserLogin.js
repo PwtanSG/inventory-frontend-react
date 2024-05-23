@@ -35,7 +35,7 @@ const CognitoUserLogin = () => {
           // console.log(res)
           setLoginErr('');
           setUserSession(res.accessToken.payload.username, res.idToken.jwtToken)
-          navigate('/about')
+          navigate('/')
         }
       } catch (err) {
         console.log(err);
