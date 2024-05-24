@@ -152,9 +152,9 @@ const ProductList = () => {
     return (
         <>
             <div className='left' style={{ "marginTop": "8px" }}>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={onExportCsv}><FaFileCsv size={20} className='mx-1' /></button>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={() => { setViewType('List View') }}><FaList size={20} className='mx-1' /></button>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} onClick={() => { setViewType('Card View') }}><FaBuromobelexperte size={20} className='mx-1' /></button>
+                <button style={{ "border": "none", "backgroundColor": "#FFF" }} title="Download CSV" onClick={onExportCsv}><FaFileCsv size={20} className='mx-1' /></button>
+                <button style={{ "border": "none", "backgroundColor": "#FFF" }} title="List View" onClick={() => { setViewType('List View') }}><FaList size={20} className='mx-1' /></button>
+                <button style={{ "border": "none", "backgroundColor": "#FFF" }} title="Card View" onClick={() => { setViewType('Card View') }}><FaBuromobelexperte size={20} className='mx-1' /></button>
                 <span> {viewType} </span>
             </div>
             <br></br>
