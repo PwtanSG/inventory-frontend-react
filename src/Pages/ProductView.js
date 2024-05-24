@@ -108,14 +108,7 @@ const ProductView = () => {
         <>
             {toastSuccess && <ToastComponent text={'Delete Successfully'} type={'success'} position={'top-end'} />}
             {toastError && <ToastComponent text={'Delete Error'} type={'error'} position={'top-end'} />}
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100vh',
-                }}
-            >
+            <div className='full-page-ctn'>
                 <Container>
                     <Row>
                         <Col xs>
