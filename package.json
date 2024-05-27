@@ -27,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "npm run build && aws s3 sync build/ s3://product-inventory-pwt --profile admins3",
+    "deploy": "npm run build && aws s3 sync build/ s3://www.demo-dev.website --profile admins3",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
