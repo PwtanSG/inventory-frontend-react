@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { logout } from '../Services/cognitoAuth';
 import { resetUserSession, getSessionUser } from '../Services/userSession';
+import { useAuth } from '../Context/Auth/useAuth';
 
 const Header = () => {
     const currentUser = getSessionUser();
     const location = useLocation();
     const navigate = useNavigate();
+    const { auth, setAuth } = useAuth()
+    
     const onLogout = () => {
         resetUserSession()
+        setAuth({})
         logout();
         navigate('/login')
     }
@@ -43,7 +47,8 @@ const Header = () => {
                 {location.pathname !== '/login' && (
                     <>
                         <li>
-                            {currentUser ? currentUser : ""}
+                            {/* {currentUser ? currentUser : ""} */}
+                            {auth?.username ? auth.username ? auth.username : "" : ""}
                         </li>
                         <li>
                             <Link to='/login'>

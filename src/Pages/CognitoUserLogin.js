@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { authenticate } from '../Services/cognitoAuth';
 import { FaSpinner, FaSignInAlt } from 'react-icons/fa';
 import { setUserSession, resetUserSession } from '../Services/userSession';
+import { useAuth } from '../Context/Auth/useAuth';
 
 const CognitoUserLogin = () => {
 
@@ -13,6 +14,7 @@ const CognitoUserLogin = () => {
   const initLoginForm = { username: '', password: '' };
   const [loginFormData, setLoginFormData] = useState(initLoginForm)
   const [isLogging, setLogging] = useState(false);
+  const { setAuth } = useAuth();
 
   const onChangeHandler = (e) => {
     setLoginFormData(prev => ({
@@ -35,6 +37,9 @@ const CognitoUserLogin = () => {
           // console.log(res)
           setLoginErr('');
           setUserSession(res.accessToken.payload.username, res.idToken.jwtToken)
+          const username = res.accessToken.payload.username
+          const token = res.idToken.jwtToken
+          setAuth({ username, token })
           navigate('/')
         }
       } catch (err) {

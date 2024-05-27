@@ -9,26 +9,29 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import CognitoUserLogin from "./Pages/CognitoUserLogin";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import { AuthProvider } from "./Context/Auth/AuthProvider";
 // import About from "./Pages/About";
 
 function App() {
   return (
     <>
       <Router>
-        <Header />
-        <div className="container">
-          <Routes>
-            <Route path="/login" element={<CognitoUserLogin />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<ProductList />} />
-              <Route path="/product/:id" element={<ProductView />} />
-              <Route path="/product/create" element={<ProductCreate />} />
-              <Route path="/product/edit/:id" element={<ProductEdit />} />
-            </Route>
-            <Route path="*" element={<NotFoundScreen />} />
-          </Routes>
-        </div>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <div className="container">
+            <Routes>
+              <Route path="/login" element={<CognitoUserLogin />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/" element={<ProductList />} />
+                <Route path="/product/:id" element={<ProductView />} />
+                <Route path="/product/create" element={<ProductCreate />} />
+                <Route path="/product/edit/:id" element={<ProductEdit />} />
+              </Route>
+              <Route path="*" element={<NotFoundScreen />} />
+            </Routes>
+          </div>
+          <Footer />
+        </AuthProvider>
       </Router>
     </>
   );
