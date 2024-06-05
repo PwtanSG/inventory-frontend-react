@@ -63,6 +63,9 @@ const ProductView = () => {
             setLoading(false)
         } catch (error) {
             console.log(error)
+            if (error.response.status === 401) {
+                navigate('/login')
+            }
             setToastError(true)
             setStatus({
                 error: true,
@@ -88,6 +91,9 @@ const ProductView = () => {
                 setLoading(false)
             } catch (err) {
                 // console.log('err', err)
+                if (err.response.status === 401) {
+                    navigate('/login')
+                }
                 setLoading(false)
                 setStatus({
                     ...status,

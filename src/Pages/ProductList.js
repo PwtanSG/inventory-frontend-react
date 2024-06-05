@@ -40,6 +40,9 @@ const ProductList = () => {
                 setLoading(false)
             } catch (err) {
                 console.log('err', err)
+                if (err.response.status === 401) {
+                    navigate('/login')
+                }
                 setStatus({
                     ...status,
                     error: true,

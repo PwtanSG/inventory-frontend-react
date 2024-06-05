@@ -175,7 +175,10 @@ const ProductEdit = () => {
             setProcessing(false)
             // setLoading(false)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
+            if (error.response.status === 401) {
+                navigate('/login')
+            }
             setToastError(true)
             setStatus({
                 error: true,
