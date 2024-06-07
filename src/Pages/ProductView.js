@@ -14,7 +14,8 @@ const ProductView = () => {
     const initProduct = {
         productId: '',
         productName: '',
-        qty: 0
+        qty: 0,
+        isActive: false
     }
 
     let mount = useRef(true)
@@ -132,6 +133,20 @@ const ProductView = () => {
                                 <p className="card-text">Product Id : {!isLoading ? product.productId : ""}</p>
                                 <p className="card-text">Qty : {!isLoading ? product.qty : ""}</p>
                                 <p className="card-text">Description : {!isLoading ? product?.description : ""}</p>
+                                <p>
+                                    <label>
+                                        <span className='mx-2'>Active :</span>
+                                        {!isLoading &&
+                                            <input
+                                                type="checkbox"
+                                                name="isActive"
+                                                checked={product.isActive}
+                                                className='form-check-input'
+                                                readOnly
+                                            />
+                                        }
+                                    </label>
+                                </p>
                                 <span className='icon'><FaRegEdit onClick={() => navigate('/product/edit/' + product.productId)} /></span>
                                 <span className='danger' style={{ "marginLeft": "8px" }}><FaRegTrashAlt onClick={handleShow} /></span>
                             </div>
