@@ -143,6 +143,7 @@ const ProductView = () => {
                                                 checked={product.isActive}
                                                 className='form-check-input'
                                                 readOnly
+                                                disabled
                                             />
                                         }
                                     </label>
