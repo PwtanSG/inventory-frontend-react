@@ -9,6 +9,7 @@ import placeholderImg from '../assets/img-product-placeholder.png'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Checkbox from '../Components/Checkbox';
 
 const ProductView = () => {
     const initProduct = {
@@ -137,14 +138,7 @@ const ProductView = () => {
                                     <label>
                                         <span className='mx-2'>Active :</span>
                                         {!isLoading &&
-                                            <input
-                                                type="checkbox"
-                                                name="isActive"
-                                                checked={product.isActive}
-                                                className='form-check-input'
-                                                readOnly
-                                                disabled
-                                            />
+                                            <Checkbox name="isActive" disabled={true} checked={product.isActive}/>
                                         }
                                     </label>
                                 </p>

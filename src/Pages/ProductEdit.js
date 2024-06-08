@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ToastComponent from '../Components/ToastComponent'
 import placeholderImg from '../assets/img-product-placeholder.png'
 import { uploadFile } from 'react-s3'; //client upload
+import Checkbox from '../Components/Checkbox'
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 // using aws client upload 
@@ -30,6 +31,7 @@ const ProductEdit = () => {
         productDescription: '',
         productImage: '',
         qty: 0,
+        isActive: false
     }
     const [formData, setFormData] = useState(initFormData)
 
@@ -227,6 +229,19 @@ const ProductEdit = () => {
                                     disabled={true}
                                     required='required'
                                 ></input>
+                            </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'left',
+                                    justifyContent: 'left',
+                                    // height: '100vh',
+                                }}
+                            >
+                                <span className='mx-2'>Active :</span>
+                                {!isLoading &&
+                                    <Checkbox name="isActive" disabled={false} checked={formData.isActive} setFormData={setFormData} />
+                                }
                             </div>
                             <div className='form-group m-2'>
                                 <label htmlFor="productName">Product Name:</label>
