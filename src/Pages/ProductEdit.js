@@ -231,12 +231,13 @@ const ProductEdit = () => {
                                 ></input>
                             </div>
                             <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'left',
-                                    justifyContent: 'left',
-                                    // height: '100vh',
-                                }}
+                                // style={{
+                                //     display: 'flex',
+                                //     alignItems: 'left',
+                                //     justifyContent: 'left',
+                                //     // height: '100vh',
+                                // }}
+                                className='left m-2'
                             >
                                 {!isLoading &&
                                     <Checkbox name="isActive" label="Active:" disabled={false} checked={formData.isActive} setFormData={setFormData} />
