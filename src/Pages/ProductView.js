@@ -136,10 +136,11 @@ const ProductView = () => {
                                 <p className="card-text">Description : {!isLoading ? product?.description : ""}</p>
                                 <p>
                                     <label>
-                                        <span className='mx-2'>Active :</span>
-                                        {!isLoading &&
+                                        Status: 
+                                        <span className='mx-2'>{product.isActive? "Active" : "InActive"} </span>
+                                        {/* {!isLoading &&
                                             <Checkbox name="isActive" disabled={true} checked={product.isActive}/>
-                                        }
+                                        } */}
                                     </label>
                                 </p>
                                 <span className='icon'><FaRegEdit onClick={() => navigate('/product/edit/' + product.productId)} /></span>
