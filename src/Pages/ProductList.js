@@ -26,6 +26,7 @@ const ProductList = () => {
     // const API_URL_ASSETS = process.env.REACT_APP_BACKEND_ASSETS
     const navigate = useNavigate();
     const token = getSessionToken();
+    const iconStyle = { "border": "none", "backgroundColor": "#FFF" }
     axios.defaults.headers['Authorization'] = token;
 
     useEffect(() => {
@@ -155,9 +156,9 @@ const ProductList = () => {
     return (
         <>
             <div className='left' style={{ "marginTop": "8px" }}>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} title="Download CSV" onClick={onExportCsv}><FaFileCsv size={20} className='mx-1' /></button>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} title="List View" onClick={() => { setViewType('List View') }}><FaList size={20} className='mx-1' /></button>
-                <button style={{ "border": "none", "backgroundColor": "#FFF" }} title="Card View" onClick={() => { setViewType('Card View') }}><FaBuromobelexperte size={20} className='mx-1' /></button>
+                <button style={iconStyle} title="Download CSV" onClick={onExportCsv}><FaFileCsv size={25} className='mx-0' /></button>
+                <button style={iconStyle} title="List View" onClick={() => { setViewType('List View') }}><FaList size={25} className='mx-1' /></button>
+                <button style={iconStyle} title="Card View" onClick={() => { setViewType('Card View') }}><FaBuromobelexperte size={25} className='mx-1' /></button>
                 <span> {viewType} </span>
             </div>
             <br></br>
