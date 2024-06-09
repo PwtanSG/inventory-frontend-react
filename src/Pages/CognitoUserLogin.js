@@ -51,7 +51,7 @@ const CognitoUserLogin = () => {
   }
 
   return (
-    <div className='full-page-ctn'>
+    <div className='row justify-content-md-center align-items-center vh-100'>
       <form onSubmit={onSubmitHandler} className='col-xs-5 col-sm-5 col-lg-4 col-10 border border-1 px-3 py-3 rounded-4'>
         {loginErr && <p className="message text-danger">{loginErr}</p>}
         <div className="mb-3 mt-3">
