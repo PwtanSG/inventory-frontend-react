@@ -10,14 +10,17 @@ const Checkbox = (props) => {
 
     return (
         <>
-            <input
-                type="checkbox"
-                name={props.name}
-                checked={props.checked}
-                className='form-check-input'
-                disabled={props.disabled}
-                onChange={onChangeHandler}
-            />
+            <label>
+                {props.label}
+                <input
+                    type="checkbox"
+                    name={props.name}
+                    checked={props.checked}
+                    className='form-check-input mx-2'
+                    disabled={props.disabled}
+                    onChange={onChangeHandler}
+                />
+            </label>
         </>
     )
 }
