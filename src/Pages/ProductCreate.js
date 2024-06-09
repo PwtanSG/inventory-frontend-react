@@ -6,6 +6,7 @@ import { BsFillFileEarmarkPlusFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import ToastComponent from '../Components/ToastComponent'
 import placeholderImg from '../assets/img-product-placeholder.png'
+import Checkbox from '../Components/Checkbox'
 
 const ProductCreate = () => {
     const initFormData = {
@@ -14,6 +15,7 @@ const ProductCreate = () => {
         description: '',
         productImage: '',
         qty: 0,
+        isActive: true
     }
     const [formData, setFormData] = useState(initFormData)
 
@@ -204,6 +206,11 @@ const ProductCreate = () => {
                                     onChange={onChangeHandler}
                                 // required='required'
                                 ></input>
+                            </div>
+                            <div className='float-start m-2'>
+                                {!isLoading &&
+                                    <Checkbox name="isActive" label="Active:" disabled={false} checked={formData.isActive} setFormData={setFormData} />
+                                }
                             </div>
                             <div className='form-group m-2'>
                                 <textarea
