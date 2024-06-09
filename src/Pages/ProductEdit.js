@@ -238,9 +238,8 @@ const ProductEdit = () => {
                                     // height: '100vh',
                                 }}
                             >
-                                <span className='mx-2'>Active :</span>
                                 {!isLoading &&
-                                    <Checkbox name="isActive" disabled={false} checked={formData.isActive} setFormData={setFormData} />
+                                    <Checkbox name="isActive" label="Active:" disabled={false} checked={formData.isActive} setFormData={setFormData} />
                                 }
                             </div>
                             <div className='form-group m-2'>
