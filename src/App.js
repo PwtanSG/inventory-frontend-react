@@ -10,6 +10,7 @@ import Footer from "./Components/Footer";
 import CognitoUserLogin from "./Pages/CognitoUserLogin";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import { AuthProvider } from "./Context/Auth/AuthProvider";
+import Scanner from "./Pages/Scanner";
 // import About from "./Pages/About";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
               <Route path="/login" element={<CognitoUserLogin />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<ProductList />} />
+                <Route path="/scanner" element={<Scanner />} />
                 <Route path="/product/:id" element={<ProductView />} />
                 <Route path="/product/create" element={<ProductCreate />} />
                 <Route path="/product/edit/:id" element={<ProductEdit />} />

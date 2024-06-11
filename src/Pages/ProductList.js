@@ -3,7 +3,7 @@ import axios from 'axios'
 import DataTable from 'react-data-table-component'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-import { FaSpinner, FaList, FaBuromobelexperte, FaFileCsv } from 'react-icons/fa'
+import { FaSpinner, FaList, FaBuromobelexperte, FaFileCsv, FaBarcode } from 'react-icons/fa'
 import SearchBar from '../Components/Searchbar'
 import ProductCard from '../Components/ProductCard'
 import exportFromJSON from 'export-from-json'
@@ -156,7 +156,8 @@ const ProductList = () => {
     return (
         <>
             <div className='left' style={{ "marginTop": "8px" }}>
-                <button style={iconStyle} title="Download CSV" onClick={onExportCsv}><FaFileCsv size={25} className='mx-0' /></button>
+                <button style={iconStyle} title="Download CSV" onClick={onExportCsv}><FaFileCsv size={25} className='mx-1' /></button>
+                <button style={iconStyle} title="Barcode Scanner" onClick={() => { navigate('/scanner') }}><FaBarcode size={25} className='mx-1'/></button>
                 <button style={iconStyle} title="List View" onClick={() => { setViewType('List View') }}><FaList size={25} className='mx-1' /></button>
                 <button style={iconStyle} title="Card View" onClick={() => { setViewType('Card View') }}><FaBuromobelexperte size={25} className='mx-1' /></button>
                 <span> {viewType} </span>

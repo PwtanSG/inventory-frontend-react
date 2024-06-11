@@ -96,6 +96,10 @@ const ProductView = () => {
                 if (err.response.status === 401) {
                     navigate('/login')
                 }
+                if (err.response.status === 404) {
+                    navigate('/NotFoundScreen')
+                }
+
                 setLoading(false)
                 setStatus({
                     ...status,
