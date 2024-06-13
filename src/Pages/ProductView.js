@@ -9,7 +9,8 @@ import placeholderImg from '../assets/img-product-placeholder.png'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Checkbox from '../Components/Checkbox';
+// import Checkbox from '../Components/Checkbox';
+import ModalPopUp from '../Components/ModalPopUp';
 
 const ProductView = () => {
     const initProduct = {
@@ -43,11 +44,11 @@ const ProductView = () => {
 
     const { id } = useParams()
 
-    const onDeleteHandler = async (pid) => {
+    const onDeleteHandler = async () => {
         setShowModal(false)
         try {
             setLoading(true)
-            const response = await axios.delete(`${API_URL_PRODUCT}`, { data: { productId: pid } })
+            const response = await axios.delete(`${API_URL_PRODUCT}`, { data: { productId: id } })
             // console.log(response)
             if (response.status === 200) {
                 setToastSuccess(true)
@@ -136,8 +137,8 @@ const ProductView = () => {
                                 <p className="card-text">Description : {!isLoading ? product?.description : ""}</p>
                                 <p>
                                     <label>
-                                        Status: 
-                                        <span className='mx-2'>{product.isActive? "Active" : "InActive"} </span>
+                                        Status:
+                                        <span className='mx-2'>{product.isActive ? "Active" : "InActive"} </span>
                                         {/* {!isLoading &&
                                             <Checkbox name="isActive" disabled={true} checked={product.isActive}/>
                                         } */}
@@ -155,7 +156,7 @@ const ProductView = () => {
                     </Row>
                 </Container>
             </div>
-            <Modal show={showModal} onHide={handleClose}>
+            {/* <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title><FaTrashAlt /> Delete record?</Modal.Title>
                 </Modal.Header>
@@ -168,7 +169,16 @@ const ProductView = () => {
                         Delete
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
+
+            <ModalPopUp
+                showModal={showModal}
+                handleClose={handleClose}
+                onModalClickHandler={onDeleteHandler}
+                modalTitle="Delete item?"
+                modalBody="Confirm delete?"
+                buttonName="Yes"
+            />
         </>
     )
 }
