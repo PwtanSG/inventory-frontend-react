@@ -57,17 +57,17 @@ const CognitoUserLogin = () => {
         <div className="mb-3 mt-3">
           <h2><FaSignInAlt /><span className='px-2 py-2'>Login</span></h2>
         </div>
-        <div className="mb-3 mt-3">
+        {/* <div className="mb-3 mt-3">
           <input
-            type="username"
+            type="text"
             className="form-control"
             placeholder="Enter username (admin)"
             name="username"
             value={loginFormData.username}
             onChange={onChangeHandler}
           />
-        </div>
-        <div className="mb-3">
+        </div> */}
+        {/* <div className="mb-3">
           <input
             type="password"
             className="form-control"
@@ -76,6 +76,34 @@ const CognitoUserLogin = () => {
             value={loginFormData.password}
             onChange={onChangeHandler}
           />
+        </div> */}
+        <div className="form-floating mb-3 mt-3">
+          <input
+            type="text"
+            name="username"
+            className="form-control"
+            id="floatingInput"
+            placeholder="username"
+            value={loginFormData.username}
+            onChange={onChangeHandler}
+          />
+          <label htmlFor="floatingInput">
+            Username (admin)
+          </label>
+        </div>
+        <div className="form-floating  mb-3 mt-3">
+          <input
+            type="password"
+            name="password"
+            className="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            value={loginFormData.password}
+            onChange={onChangeHandler}
+          />
+          <label htmlFor="floatingPassword">
+            Password (abcd1234)
+          </label>
         </div>
         <button type="submit" className="btn btn-primary col-12 my-2" onClick={onSubmitHandler} disabled={isLogging}>
           Login
